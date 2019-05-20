@@ -12,7 +12,7 @@
   "scripts": {
     "start": "start-storybook -p 9009",
     "build": "build-storybook",
-    "deploy-storybook": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl",
+    "deploy": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

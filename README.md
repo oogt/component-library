@@ -15,6 +15,6 @@ Storybook will run at http://localhost:9009 (it will automatically open)
 
 ## Deploying
 An online version of this Storybook can be found at http://component-library.oogt-dev.nl/. To deploy it, run:  
-`npm run deploy-storybook`
+`npm run deploy`
 
-It will run a build and deploy it to the S3 bucket. 
+It will run a build and deploy it to the S3 bucket.
