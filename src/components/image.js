@@ -1,0 +1,61 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+import LazyLoad from "react-lazy-load";
+
+import { wipe, reveal } from "./animations";
+
+const DURATION = 1000;
+
+const Wrapper = styled.div`
+  position: relative;
+  max-width: 480px;
+`;
+
+const ImageEl = styled.img`
+  max-width: 100%;
+  z-index: 1;
+  display: block;
+`;
+
+const ImageWrapper = styled.div`
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  position: relative;
+  opacity: ${({ loaded }) => loaded ? 1 : 0};
+  transition: opacity cubic-bezier(0.815, 0.115, 0.375, 0.69) ${DURATION}ms;
+  animation: ${reveal} ${DURATION * 1.5}ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.815, 0.115, 0.375, 0.69);
+  overflow: hidden;
+
+  :before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: ${({ overlayColor }) => overlayColor || "#fff"};
+    z-index: 2;
+
+    animation: ${wipe} ${DURATION}ms;
+    animation-fill-mode: forwards;
+    animation-delay: ${DURATION / 3}ms;
+    animation-timing-function: cubic-bezier(0.815, 0.115, 0.375, 0.69);
+  }
+`;
+
+const Image = ({ src, overlayColor }) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <Wrapper>
+      <LazyLoad>
+        <ImageWrapper loaded={loaded} overlayColor={overlayColor}>
+          <ImageEl src={src} alt={src} onLoad={() => setLoaded(true)} />
+        </ImageWrapper>
+      </LazyLoad>
+    </Wrapper>
+  );
+};
+
+export default Image;
