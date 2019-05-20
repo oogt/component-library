@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LazyLoad from "react-lazy-load";
 
 import { wipe, reveal } from "./animations";
+import { medium } from "./easings";
 
 const DURATION = 1000;
 
@@ -22,10 +23,10 @@ const ImageWrapper = styled.div`
   display: inline-block;
   position: relative;
   opacity: ${({ loaded }) => loaded ? 1 : 0};
-  transition: opacity cubic-bezier(0.815, 0.115, 0.375, 0.69) ${DURATION}ms;
+  transition: opacity ${medium} ${DURATION}ms;
   animation: ${reveal} ${DURATION * 1.5}ms;
   animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.815, 0.115, 0.375, 0.69);
+  animation-timing-function: ${medium};
   overflow: hidden;
 
   :before {
@@ -41,7 +42,7 @@ const ImageWrapper = styled.div`
     animation: ${wipe} ${DURATION}ms;
     animation-fill-mode: forwards;
     animation-delay: ${DURATION / 3}ms;
-    animation-timing-function: cubic-bezier(0.815, 0.115, 0.375, 0.69);
+    animation-timing-function: ${medium};
   }
 `;
 
