@@ -13,7 +13,7 @@ import Title from "../components/title";
 const titleCounts = ["first", "second", "third"];
 
 storiesOf("Titles", module).add("with reveal effect", () => {
-  button("Replay animation", reRender);
+  button("Replay title animation", reRender);
   return (
     <div key={counter}>
       {titleCounts.map((titleCount, index) => {
