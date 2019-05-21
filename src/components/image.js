@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import LazyLoad from "react-lazy-load";
 
-import { wipe, reveal } from "./animations";
-import { medium } from "./easings";
+import { wipe, reveal } from "../config/animations";
+import { medium } from "../config/easings";
 
 const DURATION = 1000;
 

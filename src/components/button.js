@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { medium } from "./easings";
-
-export const defaultColor = "#ff6161";
-export const defaultTextColor = "#fff";
+import { medium } from "../config/easings";
+import { defaultColor, defaultTextColor } from '../config/colors';
 
 const ButtonWrapper = styled.a`
   text-align: center;
@@ -57,9 +55,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Button = ({ color, textColor, children }) => (
+const Button = ({ onClick, color, textColor, children }) => (
   <Wrapper color={color} textColor={textColor}>
-    <ButtonWrapper color={color} textColor={textColor}>
+    <ButtonWrapper color={color} textColor={textColor} onClick={onClick}>
       {children}
     </ButtonWrapper>
   </Wrapper>

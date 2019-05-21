@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   height: 50vh;
   min-height: 600px;
   position: relative;
+  display: flex;
+  align-items: center;
 `;
 
 const Section = ({ even, children }) => (
