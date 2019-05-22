@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import LazyLoad from "react-lazy-load";
 
 import { wipe, reveal } from "../config/animations";
@@ -19,7 +19,6 @@ const ImageEl = styled.img`
 `;
 
 const ImageWrapper = styled.div`
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   display: inline-block;
   position: relative;
   opacity: ${({ loaded }) => (loaded ? 1 : 0)};
@@ -29,26 +28,21 @@ const ImageWrapper = styled.div`
   animation-timing-function: ${medium};
   overflow: hidden;
 
-  ${({ noOverlay }) =>
-    !noOverlay &&
-    css`
-      :before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: ${({ overlayColor }) => overlayColor || "#fff"};
-        z-index: 2;
+  :before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: ${({noOverlay}) => noOverlay ? 0 : '100%'};
+    height: ${({noOverlay}) => noOverlay ? 0 : '100%'};
+    background: ${({ overlayColor }) => overlayColor || "#fff"};
+    z-index: 2;
 
-        animation: ${wipe} ${DURATION}ms;
-        animation-fill-mode: forwards;
-        animation-delay: ${DURATION / 3}ms;
-        animation-timing-function: ${medium};
-      }
-    `}
-  )}
+    animation: ${wipe} ${DURATION}ms;
+    animation-fill-mode: forwards;
+    animation-delay: ${DURATION / 3}ms;
+    animation-timing-function: ${medium};
+  }
 `;
 
 const Image = ({ src, overlayColor, noOverlay, offset, ...props }) => {

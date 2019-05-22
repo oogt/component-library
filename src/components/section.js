@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   max-width: 100%;
   background: ${({ even }) => (even ? "#fbfbfb" : "#fff")};
   padding: 2em;
-  height: 50vh;
+  height: auto;
   min-height: ${({ minHeight }) => minHeight || 600}px;
   position: relative;
   display: flex;

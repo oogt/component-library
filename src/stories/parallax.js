@@ -19,6 +19,8 @@ const marginStyle = {
   marginRight: "4em"
 };
 
+const LOAD_OFFSET = 500;
+
 storiesOf("Parallax", module).add("with images", () => {
   const ContentBlock = styled.div`
     background: ${defaultBlockColor};
@@ -31,14 +33,14 @@ storiesOf("Parallax", module).add("with images", () => {
     margin-top: -20vh;
   `;
 
-  const fast = number('Offset outside elements', 100, {
+  const fast = number("Offset outside elements", 100, {
     range: true,
     min: 5,
     max: 250,
     step: 5
   });
 
-  const medium = number('Offset inner elements', 50, {
+  const medium = number("Offset inner elements", 50, {
     range: true,
     min: 5,
     max: 250,
@@ -51,21 +53,22 @@ storiesOf("Parallax", module).add("with images", () => {
         <ContentBlock />
         <StyledFlex alignItems="center" justifyContent="center">
           <Parallax y={[-fast, fast]} styleOuter={marginStyle}>
-            <Image src={Cone03} noOverlay offset={200} />
+            <Image src={Cone03} noOverlay offset={LOAD_OFFSET} />
           </Parallax>
           <Parallax y={[-medium, medium]} styleOuter={marginStyle}>
-            <Image src={Cone02} noOverlay offset={200} />
+            <Image src={Cone02} noOverlay offset={LOAD_OFFSET} />
           </Parallax>
           <Parallax y={[0, 0]} styleOuter={marginStyle}>
-            <Image src={Cone01} noOverlay offset={200} />
+            <Image src={Cone01} noOverlay offset={LOAD_OFFSET} />
           </Parallax>
           <Parallax y={[-medium, medium]} styleOuter={marginStyle}>
-            <Image src={Cone04} noOverlay offset={200} />
+            <Image src={Cone04} noOverlay offset={LOAD_OFFSET} />
           </Parallax>
           <Parallax y={[-fast, fast]}>
-            <Image src={Cone05} noOverlay offset={200} />
+            <Image src={Cone05} noOverlay offset={LOAD_OFFSET} />
           </Parallax>
         </StyledFlex>
+        <ContentBlock />
       </Section>
     </ParallaxProvider>
   );
