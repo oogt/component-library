@@ -6,14 +6,15 @@ const Wrapper = styled.div`
   background: ${({ even }) => (even ? "#fbfbfb" : "#fff")};
   padding: 2em;
   height: 50vh;
-  min-height: 600px;
+  min-height: ${({ minHeight }) => minHeight || 600}px;
   position: relative;
   display: flex;
+  flex-direction: ${({ column }) => (column ? "column" : "row")};
   align-items: center;
 `;
 
-const Section = ({ even, children }) => (
-  <Wrapper even={even}>{children}</Wrapper>
+const Section = ({ children, ...props }) => (
+  <Wrapper {...props}>{children}</Wrapper>
 );
 
 export default Section;

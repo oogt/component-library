@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import LazyLoad from "react-lazy-load";
 
 import { wipe, reveal } from "../config/animations";
@@ -22,36 +22,45 @@ const ImageWrapper = styled.div`
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   display: inline-block;
   position: relative;
-  opacity: ${({ loaded }) => loaded ? 1 : 0};
+  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
   transition: opacity ${medium} ${DURATION}ms;
   animation: ${reveal} ${DURATION * 1.5}ms;
   animation-fill-mode: forwards;
   animation-timing-function: ${medium};
   overflow: hidden;
 
-  :before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: ${({ overlayColor }) => overlayColor || "#fff"};
-    z-index: 2;
+  ${({ noOverlay }) =>
+    !noOverlay &&
+    css`
+      :before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: ${({ overlayColor }) => overlayColor || "#fff"};
+        z-index: 2;
 
-    animation: ${wipe} ${DURATION}ms;
-    animation-fill-mode: forwards;
-    animation-delay: ${DURATION / 3}ms;
-    animation-timing-function: ${medium};
-  }
+        animation: ${wipe} ${DURATION}ms;
+        animation-fill-mode: forwards;
+        animation-delay: ${DURATION / 3}ms;
+        animation-timing-function: ${medium};
+      }
+    `}
+  )}
 `;
 
-const Image = ({ src, overlayColor }) => {
+const Image = ({ src, overlayColor, noOverlay, offset, ...props }) => {
   const [loaded, setLoaded] = useState(false);
   return (
-    <Wrapper>
-      <LazyLoad>
-        <ImageWrapper loaded={loaded} overlayColor={overlayColor}>
+    <Wrapper {...props}>
+      <LazyLoad offset={offset}>
+        <ImageWrapper
+          loaded={loaded}
+          overlayColor={overlayColor}
+          noOverlay={noOverlay}
+        >
           <ImageEl src={src} alt={src} onLoad={() => setLoaded(true)} />
         </ImageWrapper>
       </LazyLoad>
