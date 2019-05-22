@@ -28,7 +28,7 @@ storiesOf("Parallax", module).add("with images", () => {
   `;
 
   const StyledFlex = styled(Flex)`
-    transform: translateY(-50%);
+    margin-top: -20vh;
   `;
 
   const fast = number('Offset outside elements', 100, {
