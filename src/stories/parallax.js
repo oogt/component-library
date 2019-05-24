@@ -6,6 +6,7 @@ import { number } from "@storybook/addon-knobs";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 
 import { defaultBlockColor } from "../config/colors";
+import { medium } from "../config/easings";
 import Section from "../components/section";
 import Image from "../components/image";
 
@@ -15,11 +16,24 @@ import Cone03 from "../static/images/cones/03.png";
 import Cone04 from "../static/images/cones/04.png";
 import Cone05 from "../static/images/cones/05.png";
 
-const marginStyle = {
-  marginRight: "4em"
-};
-
 const LOAD_OFFSET = 500;
+const TRANSITION_SPEED = 500;
+
+const StyledParallax = styled(Parallax)`
+  .parallax-outer {
+    margin-right: 4em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .parallax-inner {
+    transition: all
+      ${({ transitionSpeed }) => transitionSpeed || TRANSITION_SPEED}ms
+      ${medium};
+  }
+`;
 
 storiesOf("Parallax", module).add("with images", () => {
   const ContentBlock = styled.div`
@@ -47,26 +61,39 @@ storiesOf("Parallax", module).add("with images", () => {
     step: 5
   });
 
+  const transitionSpeed = number("Speed debounce (ms)", 500, {
+    range: true,
+    min: 100,
+    max: 2000,
+    step: 100
+  });
+
   return (
     <ParallaxProvider>
       <Section even={true} minHeight={1500} column>
         <ContentBlock />
         <StyledFlex alignItems="center" justifyContent="center">
-          <Parallax y={[-fast, fast]} styleOuter={marginStyle}>
+          <StyledParallax y={[-fast, fast]} transitionSpeed={transitionSpeed}>
             <Image src={Cone03} noOverlay offset={LOAD_OFFSET} />
-          </Parallax>
-          <Parallax y={[-medium, medium]} styleOuter={marginStyle}>
+          </StyledParallax>
+          <StyledParallax
+            y={[-medium, medium]}
+            transitionSpeed={transitionSpeed}
+          >
             <Image src={Cone02} noOverlay offset={LOAD_OFFSET} />
-          </Parallax>
-          <Parallax y={[0, 0]} styleOuter={marginStyle}>
+          </StyledParallax>
+          <StyledParallax y={[0, 0]} transitionSpeed={transitionSpeed}>
             <Image src={Cone01} noOverlay offset={LOAD_OFFSET} />
-          </Parallax>
-          <Parallax y={[-medium, medium]} styleOuter={marginStyle}>
+          </StyledParallax>
+          <StyledParallax
+            y={[-medium, medium]}
+            transitionSpeed={transitionSpeed}
+          >
             <Image src={Cone04} noOverlay offset={LOAD_OFFSET} />
-          </Parallax>
-          <Parallax y={[-fast, fast]}>
+          </StyledParallax>
+          <StyledParallax y={[-fast, fast]} transitionSpeed={transitionSpeed}>
             <Image src={Cone05} noOverlay offset={LOAD_OFFSET} />
-          </Parallax>
+          </StyledParallax>
         </StyledFlex>
         <ContentBlock />
       </Section>
