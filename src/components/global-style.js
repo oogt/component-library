@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   html, body {
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
   }
 
   *, ::after, ::before {
