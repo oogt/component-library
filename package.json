@@ -15,10 +15,9 @@
     "styled-components": "^4.2.0"
   },
   "scripts": {
-    "start": "start-storybook -s ./public -p 6007",
     "storybook": "start-storybook -s ./public -p 6007",
-    "build": "build-storybook -s ./public",
-    "deploy": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl --aws-profile=storybook-deployer"
+    "build-storybook": "build-storybook -s ./public",
+    "deploy-storybook": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl --aws-profile=storybook-deployer"
   },
   "eslintConfig": {
     "extends": "react-app"
