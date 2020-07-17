@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@rebass/grid": "^6.0.0",
+    "flickity": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-flickity-component": "^3.5.0",
     "react-lazy-load": "^3.0.13",
     "react-scripts": "3.0.1",
     "react-scroll-parallax": "^2.1.2",
@@ -13,10 +15,10 @@
     "styled-components": "^4.2.0"
   },
   "scripts": {
-    "start": "start-storybook -p 9009",
-    "build": "build-storybook",
-    "deploy": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl",
-    "eject": "react-scripts eject"
+    "start": "start-storybook -s ./public -p 6007",
+    "storybook": "start-storybook -s ./public -p 6007",
+    "build": "build-storybook -s ./public",
+    "deploy": "storybook-to-aws-s3 --bucket-path=component-library.oogt-dev.nl --aws-profile=storybook-deployer"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,12 +37,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    "@storybook/addon-actions": "^5.0.11",
-    "@storybook/addon-knobs": "^5.0.11",
-    "@storybook/addon-links": "^5.0.11",
-    "@storybook/addons": "^5.0.11",
-    "@storybook/react": "^5.0.11",
-    "@storybook/storybook-deployer": "^2.8.1",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "@storybook/storybook-deployer": "^2.8.6",
     "babel-loader": "^8.0.6"
   }
 }

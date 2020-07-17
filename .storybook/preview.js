@@ -4,7 +4,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 
 import GlobalStyle from "../components/global-style";
 
-const AppDecorator = storyFn => (
+const AppDecorator = (storyFn) => (
   <Fragment>
     <GlobalStyle />
     {storyFn()}

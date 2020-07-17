@@ -1,9 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
   }
 
   *, ::after, ::before {

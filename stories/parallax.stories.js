@@ -10,12 +10,6 @@ import { medium } from "../config/easings";
 import Section from "../components/section";
 import Image from "../components/image";
 
-import Cone01 from "../static/images/cones/01.png";
-import Cone02 from "../static/images/cones/02.png";
-import Cone03 from "../static/images/cones/03.png";
-import Cone04 from "../static/images/cones/04.png";
-import Cone05 from "../static/images/cones/05.png";
-
 const LOAD_OFFSET = 500;
 const TRANSITION_SPEED = 500;
 
@@ -51,21 +45,21 @@ storiesOf("Parallax", module).add("with images", () => {
     range: true,
     min: 5,
     max: 250,
-    step: 5
+    step: 5,
   });
 
   const medium = number("Offset inner elements", 50, {
     range: true,
     min: 5,
     max: 250,
-    step: 5
+    step: 5,
   });
 
   const transitionSpeed = number("Speed debounce (ms)", 500, {
     range: true,
     min: 100,
     max: 2000,
-    step: 100
+    step: 100,
   });
 
   return (
@@ -74,25 +68,25 @@ storiesOf("Parallax", module).add("with images", () => {
         <ContentBlock />
         <StyledFlex alignItems="center" justifyContent="center">
           <StyledParallax y={[-fast, fast]} transitionSpeed={transitionSpeed}>
-            <Image src={Cone03} noOverlay offset={LOAD_OFFSET} />
+            <Image src="/images/cones/03.png" noOverlay offset={LOAD_OFFSET} />
           </StyledParallax>
           <StyledParallax
             y={[-medium, medium]}
             transitionSpeed={transitionSpeed}
           >
-            <Image src={Cone02} noOverlay offset={LOAD_OFFSET} />
+            <Image src="/images/cones/02.png" noOverlay offset={LOAD_OFFSET} />
           </StyledParallax>
           <StyledParallax y={[0, 0]} transitionSpeed={transitionSpeed}>
-            <Image src={Cone01} noOverlay offset={LOAD_OFFSET} />
+            <Image src="/images/cones/01.png" noOverlay offset={LOAD_OFFSET} />
           </StyledParallax>
           <StyledParallax
             y={[-medium, medium]}
             transitionSpeed={transitionSpeed}
           >
-            <Image src={Cone04} noOverlay offset={LOAD_OFFSET} />
+            <Image src="/images/cones/04.png" noOverlay offset={LOAD_OFFSET} />
           </StyledParallax>
           <StyledParallax y={[-fast, fast]} transitionSpeed={transitionSpeed}>
-            <Image src={Cone05} noOverlay offset={LOAD_OFFSET} />
+            <Image src="/images/cones/05.png" noOverlay offset={LOAD_OFFSET} />
           </StyledParallax>
         </StyledFlex>
         <ContentBlock />

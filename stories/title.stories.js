@@ -3,16 +3,14 @@ import { storiesOf } from "@storybook/react";
 import { button, color, array, number } from "@storybook/addon-knobs";
 
 import { defaultColor, defaultTextColorDark } from "../config/colors";
-import { counter, reRender } from "./index";
 import Section from "../components/section";
 import Title from "../components/title";
 
 const titleCounts = ["first", "second", "third"];
 
 storiesOf("Titles", module).add("with reveal effect", () => {
-  button("Replay title animation", reRender);
   return (
-    <div key={counter}>
+    <div>
       {titleCounts.map((titleCount, index) => {
         const isEven = index % 2 === 0;
         return (
@@ -22,13 +20,13 @@ storiesOf("Titles", module).add("with reveal effect", () => {
                 range: true,
                 min: 250,
                 max: 5000,
-                step: 250
+                step: 250,
               })}
               delay={number("Delay (ms)", 500, {
                 range: true,
                 min: 0,
                 max: 2000,
-                step: 100
+                step: 100,
               })}
               color={color("Block color", defaultColor)}
               textColor={color("Text color", defaultTextColorDark)}
@@ -36,7 +34,7 @@ storiesOf("Titles", module).add("with reveal effect", () => {
               {array(`Lines #${index + 1}(comma separated)`, [
                 `The ${titleCount}`,
                 "content block",
-                "with a headline"
+                "with a headline",
               ])}
             </Title>
           </Section>
