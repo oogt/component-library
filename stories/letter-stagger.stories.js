@@ -7,3 +7,5 @@ export default {
 };
 
 export const Default = () => <LetterStagger />;
+
+export const Rotated = () => <LetterStagger rotated />;

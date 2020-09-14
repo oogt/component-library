@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "@rebass/grid";
+import { Flex } from "rebass";
 import styled from "styled-components";
 import { storiesOf } from "@storybook/react";
 import { number } from "@storybook/addon-knobs";
