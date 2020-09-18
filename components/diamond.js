@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Box } from "@rebass/grid";
+import { Box } from "rebass";
 import {
   motion,
   useViewportScroll,

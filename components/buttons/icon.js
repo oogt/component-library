@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Flex } from "@rebass/grid";
+import { Flex } from "rebass";
 
 import { medium, overshoot } from "../../config/easings";
 import { defaultColor, defaultHoverColor } from "../../config/colors";
@@ -11,15 +11,15 @@ const ICON_SIZE = 64;
 const StyledIcon = styled(Icon)`
   z-index: 2;
   position: relative;
-  transition: all .5s ${medium};
-`
+  transition: all 0.5s ${medium};
+`;
 
 const IconContainer = styled.div`
   width: 2rem;
   height: 2rem;
   overflow: hidden;
   position: relative;
-`
+`;
 
 const StyledButton = styled.button`
   background: ${({ color }) => color || defaultColor};
@@ -41,14 +41,14 @@ const StyledButton = styled.button`
     content: "";
     background: ${({ hoverColor }) => hoverColor || defaultHoverColor};
     z-index: 1;
-    transition: all .25s ${medium};
+    transition: all 0.25s ${medium};
   }
 
   &:hover {
     cursor: pointer;
 
     :after {
-      transition: all .5s ${overshoot};
+      transition: all 0.5s ${overshoot};
       transform: translateX(-50%) translateY(-50%) scale(1.2);
     }
 
@@ -73,18 +73,17 @@ const StyledButton = styled.button`
     transform: translateX(-50%);
     opacity: 0;
   }
-`
+`;
 
-
-const IconButton = ({icon, color, textColor, hoverColor}) => (
+const IconButton = ({ icon, color, textColor, hoverColor }) => (
   <StyledButton color={color} hoverColor={hoverColor}>
     <Flex alignItems="center" justifyContent="center">
-    <IconContainer>
-      <StyledIcon icon={icon} color={textColor} />
-      <StyledIcon icon={icon} color={color} />
-    </IconContainer>
+      <IconContainer>
+        <StyledIcon icon={icon} color={textColor} />
+        <StyledIcon icon={icon} color={color} />
+      </IconContainer>
     </Flex>
   </StyledButton>
-)
+);
 
 export default IconButton;
