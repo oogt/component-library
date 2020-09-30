@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Map as Locator, Search, Info } from "react-store-locator";
+import { Map as Locator, Search } from "react-store-locator";
 import { Flex, Box } from "rebass";
 
 const locations = [
@@ -23,6 +24,26 @@ const locations = [
     address: "Irenestraat 13",
     zipCode: "5051 NC",
     city: "Goirle",
+  },
+  {
+    id: 3,
+    lat: 51.54355,
+    lng: 5.14,
+    show: false,
+    name: "Wiknie",
+    address: "Pauperstraat",
+    zipCode: "1234 AB",
+    city: "Tillywood",
+  },
+  {
+    id: 3,
+    lat: 49.54355,
+    lng: 5.14,
+    show: false,
+    name: "Heuj",
+    address: "Bloe",
+    zipCode: "Bla",
+    city: "Blabloe",
   },
 ];
 
@@ -204,6 +225,10 @@ const StyledPin = styled.div`
       color: #f92150;
       background: #fff;
     }
+
+    &.is-open {
+      transform: scale(1.5);
+    }
   }
 
   > div {
@@ -232,10 +257,14 @@ const Wrapper = styled(Flex)`
     margin: 0 -2rem 2rem;
     list-style: none;
     transition: all 0.25s ease;
-    border: 1px solid #fff;
+    border-left: 4px solid #fff;
 
     &:hover {
-      border: 1px solid #eee;
+      border-left: 4px solid #eee;
+    }
+
+    &.active {
+      border-left: 4px solid #f92150;
     }
   }
 
@@ -244,37 +273,45 @@ const Wrapper = styled(Flex)`
   }
 `;
 
-const MyPin = ({ name, show, id, handleLocationClick, ...props }) => (
-  <StyledPin>
-    <button
-      className="pin"
-      type="button"
-      onClick={() => handleLocationClick(id)}
-    >
-      X
-    </button>
-    <Info show={show}>
-      {name}
+const MyPin = ({ name, show, id, handleLocationClick, pinProps, ...props }) => {
+  const { activeMarker, setActiveMarker } = pinProps;
+  return (
+    <StyledPin>
+      <button
+        className={`pin ${show && "is-open"}`}
+        type="button"
+        onClick={() => {
+          handleLocationClick(id);
 
-      <button type="button" onClick={handleLocationClick}>
-        [x]
+          if (activeMarker === id) {
+            // reset
+            setActiveMarker(null);
+            return;
+          }
+
+          setActiveMarker(id);
+        }}
+      >
+        X
       </button>
-    </Info>
-  </StyledPin>
-);
+    </StyledPin>
+  );
+};
 
 const Map = () => {
   const [visibleLocations, setVisibleLocations] = useState([]);
+  const [activeMarker, setActiveMarker] = useState(null);
   return (
     <Wrapper width={1} alignItems="center">
       <Box width={0.5}>
         <Locator
           locations={locations}
           googleApiKey="AIzaSyCrQS_i7VIlfumWW1Zv6ow9J6NVahP2p_k"
-          pin={MyPin}
-          mapOptions={{
-            disableDefaultUI: true,
+          pin={{
+            component: MyPin,
+            pinProps: { visibleLocations, activeMarker, setActiveMarker },
           }}
+          mapOptions={{}}
           onChange={setVisibleLocations}
           mapStyle={mapStyle}
         />
@@ -285,20 +322,26 @@ const Map = () => {
         <div>
           <h2>Locations:</h2>
           <ul>
-            {visibleLocations.map(
-              ({ name, address, zipCode, city, ...props }) =>
-                console.log(props) || (
-                  <li key={name}>
-                    {name}
-                    <br />
-                    {address}
-                    <br />
-                    {zipCode}
-                    <br />
-                    {city} <br />
-                  </li>
-                )
-            )}
+            {visibleLocations
+              .sort(({ id: aId }) => {
+                if (aId === activeMarker) {
+                  return -1;
+                }
+
+                return 0;
+              })
+              .map(({ id, name, address, zipCode, city, ...props }) => (
+                <li key={name} className={`${id === activeMarker && "active"}`}>
+                  {name}
+                  <br />
+                  {address}
+                  <br />
+                  {zipCode}
+                  <br />
+                  {city}
+                  <br />
+                </li>
+              ))}
           </ul>
         </div>
       </Box>
